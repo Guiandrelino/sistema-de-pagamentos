@@ -15,7 +15,7 @@
     "check": "npm run build && npm test"
   },
   "dependencies": {
-    "@nestjs/common": "^11.1.0",
+    "@nestjs/common": "^12.1.1",
     "@nestjs/core": "^11.1.0",
     "@nestjs/platform-express": "^11.1.0",
     "amqplib": "^0.10.9",
