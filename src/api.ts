@@ -4,7 +4,8 @@ import {
   Get, Headers, Injectable, Module, Param, Post, UnauthorizedException,
 } from '@nestjs/common';
 import { APP_GUARD, NestFactory } from '@nestjs/core';
-import { randomUUID, timingSafeEqual } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
+import { matchesApiKey } from './auth';
 import { z } from 'zod';
 import { config } from './config';
 import { pool } from './db';
@@ -23,10 +24,7 @@ const keySchema = z.string().min(1).max(128).regex(/^[a-zA-Z0-9._:-]+$/);
 class ApiKeyGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const value = context.switchToHttp().getRequest().headers['x-api-key'];
-    if (typeof value !== 'string') throw new UnauthorizedException();
-    const actual = Buffer.from(value);
-    const expected = Buffer.from(config.API_KEY);
-    if (actual.length !== expected.length || !timingSafeEqual(actual, expected)) throw new UnauthorizedException();
+    if (!matchesApiKey(value, config.API_KEY)) throw new UnauthorizedException();
     return true;
   }
 }
