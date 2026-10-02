@@ -1,15 +1,9 @@
 import { randomUUID } from 'node:crypto';
-import { z } from 'zod';
+import { PaymentEvent } from './events';
+export { eventSchema, PaymentEvent } from './events';
 import { transaction } from './db';
 import { postings } from './domain';
 import { audit } from './payments';
-
-export const eventSchema = z.object({
-  id: z.string().uuid(),
-  type: z.enum(['payment.requested', 'refund.requested']),
-  aggregateId: z.string().uuid(),
-}).strict();
-export type PaymentEvent = z.infer<typeof eventSchema>;
 
 export async function processEvent(event: PaymentEvent) {
   await transaction(async (db) => {
