@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^11.1.0",
-    "@nestjs/core": "^11.1.0",
+    "@nestjs/core": "^12.1.1",
     "@nestjs/platform-express": "^11.1.0",
     "amqplib": "^0.10.9",
     "dotenv": "^17.2.0",
