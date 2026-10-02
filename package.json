@@ -1,0 +1,36 @@
+{
+  "name": "simulated-distributed-payments",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Plataforma local de pagamentos distribuídos, exclusivamente simulada",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start:api": "node dist/api.js",
+    "start:worker": "node dist/worker.js",
+    "dev:api": "tsx watch src/api.ts",
+    "dev:worker": "tsx watch src/worker.ts",
+    "migrate": "tsx src/migrate.ts",
+    "test": "tsx --test test/*.test.ts",
+    "test:integration": "tsx --test test/integration/*.test.ts",
+    "check": "npm run build && npm test"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.0",
+    "@nestjs/core": "^11.1.0",
+    "@nestjs/platform-express": "^11.1.0",
+    "amqplib": "^0.10.9",
+    "dotenv": "^17.2.0",
+    "pg": "^8.16.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.7",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.15.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "engines": { "node": ">=22" }
+}
